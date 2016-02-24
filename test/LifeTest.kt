@@ -56,4 +56,17 @@ class LifeTest {
 
         assertTrue(life.isCellAlive(Cell(1, 1)))
     }
+
+
+    @Test fun thatNoLifeEvolvedResultsInNoLife() {
+        var life = Life(setOf())
+
+        life = life.evolve()
+
+        for (x in 0..50) {
+            for(y in 0..50) {
+                assertFalse(life.isCellAlive(Cell(x, y)))
+            }
+        }
+    }
 }
