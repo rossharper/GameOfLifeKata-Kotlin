@@ -69,4 +69,19 @@ class LifeTest {
             }
         }
     }
+
+    @Test fun testBlinkerOscillator() {
+        val verticalBlinker =   setOf(Cell(1, 0), Cell(1, 1), Cell(1, 2))
+        val horizontalBlinker = setOf(Cell(0, 1), Cell(1, 1), Cell(2, 1))
+
+        var life = Life(horizontalBlinker)
+
+        life = life.evolve()
+
+        assertTrue(life.initialLivingCells == verticalBlinker)
+
+        life = life.evolve()
+
+        assertTrue(life.initialLivingCells == horizontalBlinker)
+    }
 }
