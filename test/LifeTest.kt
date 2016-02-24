@@ -40,4 +40,12 @@ class LifeTest {
 
         assertTrue(life.isCellAlive(Cell(1, 0)))
     }
+
+    @Test fun thatLiveCellWithMoreThanThreeLiveNeighboursShouldDie() {
+        var life = Life(setOf(Cell(1, 0), Cell(0, 1), Cell(2, 1), Cell(2, 0), Cell(1, 1)))
+
+        life = life.evolve()
+
+        assertFalse(life.isCellAlive(Cell(1, 0)))
+    }
 }

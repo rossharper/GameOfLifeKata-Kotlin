@@ -11,7 +11,7 @@ class Life(val initialLivingCells: Set<Cell>) {
 
     private fun cellsThatShouldDie(): Iterable<Cell> {
         return initialLivingCells.filter {
-            livingNeighboursOf(it).count() < 2
+            livingNeighboursOf(it).count() !in 2..3
         }
     }
 
