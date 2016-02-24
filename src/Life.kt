@@ -6,7 +6,11 @@ class Life(val initialLivingCells: Set<Cell>) {
     }
 
     fun evolve(): Life {
-        return Life(initialLivingCells.subtract(cellsThatShouldDie()))
+        return Life(initialLivingCells.subtract(cellsThatShouldDie()).union(cellsThatShouldBeBorn()))
+    }
+
+    private fun cellsThatShouldBeBorn(): Iterable<Cell> {
+        return initialLivingCells.flatMap { deadNeighboursOf(it) }.filter { livingNeighboursOf(it).count() == 3 }.toSet()
     }
 
     private fun cellsThatShouldDie(): Iterable<Cell> {
@@ -17,6 +21,10 @@ class Life(val initialLivingCells: Set<Cell>) {
 
     private fun livingNeighboursOf(cell: Cell): Iterable<Cell> {
         return neighboursOf(cell).filter { isCellAlive(it) }
+    }
+
+    private fun deadNeighboursOf(cell: Cell): Iterable<Cell> {
+        return neighboursOf(cell).filter { !isCellAlive(it) }
     }
 
     private fun neighboursOf(cell: Cell): Iterable<Cell> {

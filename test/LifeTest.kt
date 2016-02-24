@@ -48,4 +48,12 @@ class LifeTest {
 
         assertFalse(life.isCellAlive(Cell(1, 0)))
     }
+
+    @Test fun thatNewCellIsBornWhenThreeLiveNeighbours() {
+        var life = Life(setOf(Cell(0, 0), Cell(1, 0), Cell(2, 0)))
+
+        life = life.evolve()
+
+        assertTrue(life.isCellAlive(Cell(1, 1)))
+    }
 }
