@@ -1,20 +1,19 @@
-import java.util.*
 
-class Life(val initialLivingCells: Set<Cell>) {
+class Life(val livingCells: Set<Cell>) {
     fun isCellAlive(cell: Cell): Boolean {
-        return initialLivingCells.contains(cell)
+        return livingCells.contains(cell)
     }
 
     fun evolve(): Life {
-        return Life(initialLivingCells.subtract(cellsThatShouldDie()).union(cellsThatShouldBeBorn()))
+        return Life(livingCells.subtract(cellsThatShouldDie()).union(cellsThatShouldBeBorn()))
     }
 
     private fun cellsThatShouldBeBorn(): Iterable<Cell> {
-        return initialLivingCells.flatMap { deadNeighboursOf(it) }.filter { livingNeighboursOf(it).count() == 3 }.toSet()
+        return livingCells.flatMap { deadNeighboursOf(it) }.filter { livingNeighboursOf(it).count() == 3 }.toSet()
     }
 
     private fun cellsThatShouldDie(): Iterable<Cell> {
-        return initialLivingCells.filter {
+        return livingCells.filter {
             livingNeighboursOf(it).count() !in 2..3
         }
     }

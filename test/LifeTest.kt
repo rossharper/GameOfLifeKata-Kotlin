@@ -78,10 +78,10 @@ class LifeTest {
 
         life = life.evolve()
 
-        assertTrue(life.initialLivingCells == verticalBlinker)
+        assertTrue(life.livingCells == verticalBlinker)
 
         life = life.evolve()
 
-        assertTrue(life.initialLivingCells == horizontalBlinker)
+        assertTrue(life.livingCells == horizontalBlinker)
     }
 }
